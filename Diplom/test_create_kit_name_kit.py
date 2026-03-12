@@ -26,7 +26,6 @@ class TestOrderCreation:
         # Шаг 2: Сохранить номер трека заказа
         track_id = create_response.json().get("track")
         assert track_id is not None, "Трек заказа не получен в ответе"
-        print(f"Создан заказ с треком: {track_id}")
         
         # Шаг 3: Выполнить запрос на получение заказа по треку
         get_response = sender_stand_request.get_order_by_track(track_id)
@@ -45,9 +44,6 @@ class TestOrderCreation:
             "Имя заказчика не совпадает"
         assert order_info.get("phone") == data.order_body["phone"], \
             "Телефон заказчика не совпадает"
-        
-        print(f"Заказ с треком {track_id} успешно получен")
-        print(f"Код ответа: {get_response.status_code}")
 
     def test_get_order_with_invalid_track(self):
         """
